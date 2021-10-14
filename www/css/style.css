@@ -10,6 +10,10 @@ button {
   border-radius: 20px;
 }
 
+#time::after {
+  content: "秒";
+}
+
     #minuteStr {
         color: #ff0000;
         font-size: 20px;
