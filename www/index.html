@@ -199,13 +199,35 @@
     function btnCClick(e){
         //alarm();
         active = false;
-        period = 60 * parseInt( $("#minute").val() ) + parseInt( $("#second").val() );
+        var m = parseInt( $("#minute").val() );
+        var s = parseInt( $("#second").val() );
+        period = 60 * m + s;
         $("#time").html("経過時間： 0");
-        if( parseInt($("#second").val()) < 10 ) {
-          $("#remain").html("残り時間： " + period + "秒 (" + parseInt( $("#minute").val() ) + ":0" + parseInt( $("#second").val() ) + ")");
+        if( s < 10 ) {
+          $("#remain").html("残り時間： " + period + "秒 (" + m + ":0" + s + ")");
         }else {
-          $("#remain").html("残り時間： " + period + "秒 (" + parseInt( $("#minute").val() ) + ":" + parseInt( $("#second").val() ) + ")");
+          $("#remain").html("残り時間： " + period + "秒 (" + m + ":" + s + ")");
         }
+
+        var mstr = "分:";
+        for(var i = 0; i < m; i++) {
+          mstr += "○";
+        }
+        $("#minuteStr").html(mstr);
+
+        var sstr = "秒:";
+        for(var i = 0; i < s; i++) {
+          if(i % 10 == 0 && i >= 10) {
+            if(i == 30) {
+              sstr += "<br>" + "　 ";
+            }else {
+              sstr += " ";
+            }
+          }
+          sstr += "○";
+        }
+          $("#secondStr").html(sstr);
+
         $("#btnA").prop("disabled", false);
         $("#btnB").prop("disabled", true);
     }
@@ -224,6 +246,26 @@
           }else {
             $("#remain").html("残り時間： " + rest  + "秒 (" + m + ":" + s + ")");
           }
+
+          var mstr = "分:";
+          for(var i = 0; i < m; i++) {
+            mstr += "○";
+          }
+          $("#minuteStr").html(mstr);
+
+          var sstr = "秒:";
+          for(var i = 0; i < s; i++) {
+            if(i % 10 == 0 && i >= 10) {
+              if(i == 30) {
+                sstr += "<br>" + "　 ";
+              }else {
+                sstr += " ";
+              }
+            }
+            sstr += "○";
+          }
+          $("#secondStr").html(sstr);
+
           analog(rest);
 
           if(rest <= 0) {
